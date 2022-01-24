@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import { LandLinePaymentService } from './pages/Sevices/LandLinePaymentService';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
