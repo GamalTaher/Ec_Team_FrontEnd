@@ -5,11 +5,14 @@ import { WidgetsModule } from '../../_metronic/partials';
 import { LandLinePaymentsComponent } from './land-line-payments/land-line-payments.component';
 import { UploadLandLineReportComponent } from './upload-land-line-report/upload-land-line-report.component';
 import { LandLineDifferenceComponent } from './land-line-difference/land-line-difference.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LandLinePaymentsComponent, UploadLandLineReportComponent,LandLineDifferenceComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: 'MonthlyLandLine',

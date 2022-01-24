@@ -11,8 +11,8 @@
     <!--begin::Content-->
     <div id="kt_account_settings_profile_details" class="collapse show">
         <!--begin::Form-->
-        <form id="kt_account_profile_details_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
-            <!--begin::Card body-->
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+          <!--begin::Card body-->
             <div class="card-body border-top p-9">
                 <!--begin::Input group-->
                 <div class="row mb-6">
@@ -21,18 +21,34 @@
                     <!--end::Label-->
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <!--begin::Card-->
+                        <a for="file-upload" class="text-hover-primary fs-5 fw-bolder mb-2" style="cursor: pointer;" onclick="document.getElementById('file-upload').click()">
                         <div class="card h-100 flex-center bg-light-primary border-primary border border-dashed p-8">
                             <!--begin::Image-->
                             <img src="../assets/media/svg/files/upload.svg" class="mb-5" alt="">
                             <!--end::Image-->
                             <!--begin::Link-->
-                            <a for="file-upload" class="text-hover-primary fs-5 fw-bolder mb-2" onclick="document.getElementById('file-upload').click()">File Upload</a>
-                            <input id="file-upload" type="file" style="display:none"/> 
+
+                            <div class="form-group">
+                              <input
+                                  formControlName="file"
+                                  id="file-upload"
+                                  type="file"
+                                  class="form-control"
+                                  style="display:none"
+                                  (change)="onFileChange($event)">
+                              <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                                  <div *ngIf="f.file.errors?.required">File is required.</div>
+                              </div>
+                          </div>
+
+
+                            <!-- <input id="file-upload" type="file" style="display:none"/> -->
                             <!--end::Link-->
                             <!--begin::Description-->
-                            <!-- <div class="fs-7 fw-bold text-gray-400">Drag and drop files here</div> -->
+                            <div class="fs-7 fw-bold text-gray-400">Drag and drop files here</div>
                             <!--end::Description-->
                         </div>
+                      </a>
                         <!--begin::Hint-->
                         <div class="form-text">Allowed file types: xls.</div>
                         <!--end::Hint-->
