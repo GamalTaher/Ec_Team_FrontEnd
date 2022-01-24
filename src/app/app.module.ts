@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import { LandLinePaymentService } from './pages/Sevices/LandLinePaymentService';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -32,6 +33,8 @@ function appInitializer(authService: AuthService) {
     TranslateModule.forRoot(),
     HttpClientModule,
     ClipboardModule,
+    FormsModule,
+    ReactiveFormsModule,
     // #fake-start#
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {

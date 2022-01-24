@@ -5,11 +5,13 @@ import { WidgetsModule } from '../../_metronic/partials';
 import { LandLinePaymentsComponent } from './land-line-payments/land-line-payments.component';
 import { UploadLandLineReportComponent } from './upload-land-line-report/upload-land-line-report.component';
 import { LandLineDifferenceComponent } from './land-line-difference/land-line-difference.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [LandLinePaymentsComponent, UploadLandLineReportComponent,LandLineDifferenceComponent],
   imports: [
     CommonModule,
+    NgxPaginationModule,
     RouterModule.forChild([
       {
         path: 'MonthlyLandLine',

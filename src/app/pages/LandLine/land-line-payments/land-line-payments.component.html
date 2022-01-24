@@ -51,13 +51,10 @@
                         <label class="form-label fs-5 fw-bold mb-3">Month:</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select class="form-select form-select-solid fw-bolder select2-hidden-accessible" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-customer-table-filter="month" data-dropdown-parent="#kt-toolbar-filter" data-select2-id="select2-data-10-crbz" tabindex="-1" aria-hidden="true">
-                            <option data-select2-id="select2-data-12-2gvg"></option>
-                            <option value="aug">August</option>
-                            <option value="sep">September</option>
-                            <option value="oct">October</option>
-                            <option value="nov">November</option>
-                            <option value="dec">December</option>
+                        
+                        <select  formControlName="channelOption" (change)="onChannelChange($event)" class="form-select form-select-solid fw-bolder select2-hidden-accessible" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-customer-table-filter="month" data-dropdown-parent="#kt-toolbar-filter" data-select2-id="select2-data-10-crbz" tabindex="-1" aria-hidden="true" >
+                            <option [value]="-1">-Select-</option>
+                            <option *ngFor="let item of ChannelsList" [value]="item.id">{{item.channelName}}</option>
                         </select>
                         <!-- <span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-11-0tn3" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single form-select form-select-solid fw-bolder" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-1e8c-container" aria-controls="select2-1e8c-container"><span class="select2-selection__rendered" id="select2-1e8c-container" role="textbox" aria-readonly="true" title="Select option"><span class="select2-selection__placeholder">Select option</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
                         <!--end::Input-->
@@ -101,7 +98,7 @@
                     <!--begin::Actions-->
                     <div class="d-flex justify-content-end">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
-                        <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter">Apply</button>
+                        <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter" (click)='SubmitFilter()'>Apply</button>
                     </div>
                     <!--end::Actions-->
                 </div>
@@ -137,10 +134,12 @@
     <!--end::Card toolbar-->
 </div>
   <!-- end::Header -->
+  <input type="hidden" value="{{LandPaymentsList[0].cityCode}}"/> 
+
   <!-- begin::Body -->
   <div class="card-body py-3">
     <!-- begin::Table container -->
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="LandPaymentsList">
       <!-- begin::Table -->
       <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
         <!-- begin::Table head -->
@@ -169,7 +168,7 @@
         <!-- end::Table head -->
         <!-- begin::Table body -->
         <tbody>
-          <tr *ngFor="let item of LandPaymentsList">
+          <tr *ngFor="let item of LandPaymentsList | paginate: config">
             <td>
                <div class="d-flex align-items-center">
                 <span class="text-dark fw-bolder  d-block mb-1 fs-6">
@@ -293,36 +292,8 @@
     <div class="d-flex flex-stack flex-wrap pt-10">
         <div class="fs-6 fw-bold text-gray-700">Showing 1 to 10 of 50 entries</div>
         <!--begin::Pages-->
-        <ul class="pagination">
-            <li class="page-item previous">
-                <a href="#" class="page-link">
-                    <i class="previous"></i>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a href="#" class="page-link">1</a>
-            </li>
-            <li class="page-item">
-                <a href="#" class="page-link">2</a>
-            </li>
-            <li class="page-item">
-                <a href="#" class="page-link">3</a>
-            </li>
-            <li class="page-item">
-                <a href="#" class="page-link">4</a>
-            </li>
-            <li class="page-item">
-                <a href="#" class="page-link">5</a>
-            </li>
-            <li class="page-item">
-                <a href="#" class="page-link">6</a>
-            </li>
-            <li class="page-item next">
-                <a href="#" class="page-link">
-                    <i class="next"></i>
-                </a>
-            </li>
-        </ul>
+        <pagination-controls (pageChange)="pageChange($event)" class="pagination"></pagination-controls>
+
         <!--end::Pages-->
     </div>
     <!-- end::Table container -->
